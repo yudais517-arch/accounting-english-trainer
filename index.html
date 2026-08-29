@@ -1,45 +1,186 @@
 <!DOCTYPE html>
-
 <html lang="ja">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Accounting English Trainer</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#101114;color:#fff}
+body {
+  margin: 0;
+  background: #0f1115;
+  color: #f5f5f5;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
 
-main{max-width:600px;margin:auto;padding:24px 18px 50px}
+main {
+  max-width: 620px;
+  margin: auto;
+  padding: 24px 18px 60px;
+}
 
-h1{text-align:center;font-size:27px;margin:10px 0 5px}.sub{text-align:center;color:#999;margin-bottom:25px}
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin: 12px 0 4px;
+}
 
-.stats{display:flex;justify-content:space-between;background:#1d2027;border-radius:15px;padding:15px;margin-bottom:20px}
+.subtitle {
+  text-align: center;
+  color: #999;
+  margin-bottom: 25px;
+}
 
-.card{background:#1d2027;border-radius:20px;padding:25px 18px;text-align:center}
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
 
-.question{font-size:30px;font-weight:bold;margin:25px 0 10px}
+.stat {
+  flex: 1;
+  background: #1c2028;
+  border-radius: 15px;
+  padding: 12px;
+  text-align: center;
+}
 
-.type{color:#999;font-size:14px}.choices{display:grid;gap:12px;margin-top:25px}
+.stat-number {
+  font-size: 22px;
+  font-weight: bold;
+}
 
-button{border:0;border-radius:14px;padding:16px;font-size:17px;font-weight:bold;background:#292e38;color:#fff}
+.stat-label {
+  font-size: 12px;
+  color: #999;
+  margin-top: 3px;
+}
 
-button:active{transform:scale(.98)}button.correct{background:#167c4b}button.wrong{background:#9d3030}
+.card {
+  background: #1c2028;
+  border-radius: 20px;
+  padding: 24px 18px;
+}
 
-#next{background:#fff;color:#111;margin-top:18px;width:100%;display:none}
+.type {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
 
-.explain{margin-top:18px;color:#bbb;line-height:1.6;display:none}
+.question {
+  font-size: 29px;
+  font-weight: bold;
+  margin: 20px 0;
+  line-height: 1.4;
+}
 
-.mode{display:flex;gap:10px;margin-bottom:15px}.mode button{flex:1;font-size:14px}
+.choices {
+  display: grid;
+  gap: 12px;
+}
 
-#result{text-align:center;font-size:20px;margin:15px}
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #292e38;
+  color: white;
+}
 
+button:active {
+  transform: scale(0.98);
+}
+
+.choice.correct {
+  background: #1d7a4a;
+}
+
+.choice.wrong {
+  background: #a63d3d;
+}
+
+.choice.disabled {
+  opacity: 0.7;
+}
+
+#result {
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+#explanation {
+  color: #c8c8c8;
+  line-height: 1.7;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.answer-box {
+  background: #15181e;
+  border-radius: 14px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.answer-label {
+  color: #888;
+  font-size: 13px;
+}
+
+.answer {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+#next {
+  display: none;
+  width: 100%;
+  margin-top: 18px;
+  background: white;
+  color: #111;
+}
+
+.reset {
+  margin-top: 18px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid #444;
+  color: #999;
+  font-size: 14px;
+}
+
+.progress {
+  height: 6px;
+  background: #292e38;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #777;
+  transition: width 0.3s;
+}
 </style>
-
 </head>
 
 <body>
@@ -48,8 +189,724 @@ button:active{transform:scale(.98)}button.correct{background:#167c4b}button.wron
 
 <h1>📚 Accounting English</h1>
 
-<div class="sub">会計英語トレーナー</div>
+<div class="subtitle">
+会計英語トレーナー
+</div>
 
 <div class="stats">
 
-<span>問題 <b id="num">
+  <div class="stat">
+    <div class="stat-number" id="score">0</div>
+    <div class="stat-label">正解</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-number" id="total">0</div>
+    <div class="stat-label">回答数</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-number" id="rate">0%</div>
+    <div class="stat-label">正解率</div>
+  </div>
+
+</div>
+
+<div class="progress">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="card">
+
+  <div class="type" id="type">
+    勘定科目
+  </div>
+
+  <div class="question" id="question">
+    問題
+  </div>
+
+  <div class="choices" id="choices"></div>
+
+  <div id="result"></div>
+
+  <div id="explanation"></div>
+
+  <button id="next" onclick="nextQuestion()">
+    次の問題 →
+  </button>
+
+</div>
+
+<button class="reset" onclick="resetData()">
+  学習記録をリセット
+</button>
+
+</main>
+
+<script>
+
+const questions = [
+
+  {
+    ja: "売掛金",
+    answer: "Accounts Receivable",
+    explanation:
+      "Accounts Receivable は、商品やサービスを掛けで販売したことによって、将来回収する権利を表します。略して A/R と書かれることもあります。",
+    choices: [
+      "Accounts Receivable",
+      "Accounts Payable",
+      "Notes Receivable",
+      "Accrued Expenses"
+    ]
+  },
+
+  {
+    ja: "買掛金",
+    answer: "Accounts Payable",
+    explanation:
+      "Accounts Payable は、商品やサービスを掛けで購入したことによって、将来支払う義務を表します。略して A/P と書かれることもあります。",
+    choices: [
+      "Accounts Payable",
+      "Accounts Receivable",
+      "Notes Payable",
+      "Unearned Revenue"
+    ]
+  },
+
+  {
+    ja: "現金",
+    answer: "Cash",
+    explanation:
+      "Cash は現金を意味します。貸借対照表では流動資産に分類されます。",
+    choices: [
+      "Cash",
+      "Revenue",
+      "Capital",
+      "Inventory"
+    ]
+  },
+
+  {
+    ja: "売上高",
+    answer: "Sales Revenue",
+    explanation:
+      "Sales Revenue は商品の販売などによって得られる収益です。単に Revenue と表現される場合もあります。",
+    choices: [
+      "Sales Revenue",
+      "Cost of Sales",
+      "Operating Expense",
+      "Accounts Receivable"
+    ]
+  },
+
+  {
+    ja: "売上原価",
+    answer: "Cost of Sales",
+    explanation:
+      "Cost of Sales は販売した商品の取得原価です。Cost of Goods Sold、略して COGS と表現されることも非常に多いです。",
+    choices: [
+      "Cost of Sales",
+      "Sales Revenue",
+      "Operating Income",
+      "Inventory"
+    ]
+  },
+
+  {
+    ja: "棚卸資産",
+    answer: "Inventory",
+    explanation:
+      "Inventory は販売を目的として保有する商品や製品などを表します。",
+    choices: [
+      "Inventory",
+      "Intangible Assets",
+      "Accounts Payable",
+      "Supplies"
+    ]
+  },
+
+  {
+    ja: "減価償却費",
+    answer: "Depreciation Expense",
+    explanation:
+      "Depreciation Expense は、有形固定資産の取得原価を耐用期間にわたって費用配分したものです。",
+    choices: [
+      "Depreciation Expense",
+      "Interest Expense",
+      "Income Tax Expense",
+      "Cost of Sales"
+    ]
+  },
+
+  {
+    ja: "減価償却累計額",
+    answer: "Accumulated Depreciation",
+    explanation:
+      "Accumulated Depreciation は、これまでに計上した減価償却費の累計額です。固定資産の帳簿価額を減額する評価勘定です。",
+    choices: [
+      "Accumulated Depreciation",
+      "Depreciation Expense",
+      "Accumulated Income",
+      "Provision for Taxes"
+    ]
+  },
+
+  {
+    ja: "固定資産",
+    answer: "Property, Plant and Equipment",
+    explanation:
+      "Property, Plant and Equipment は土地・建物・機械などの有形固定資産を表します。略して PP&E とされることがあります。",
+    choices: [
+      "Property, Plant and Equipment",
+      "Current Assets",
+      "Intangible Assets",
+      "Inventory"
+    ]
+  },
+
+  {
+    ja: "無形固定資産",
+    answer: "Intangible Assets",
+    explanation:
+      "Intangible Assets は、物理的な形を持たない資産です。特許権、商標権、のれんなどが代表例です。",
+    choices: [
+      "Intangible Assets",
+      "Tangible Assets",
+      "Current Liabilities",
+      "Operating Assets"
+    ]
+  },
+
+  {
+    ja: "のれん",
+    answer: "Goodwill",
+    explanation:
+      "Goodwill は企業買収などにおいて、識別可能な純資産の公正価値を超えて支払った部分などから生じる無形資産です。",
+    choices: [
+      "Goodwill",
+      "Trademark",
+      "Retained Earnings",
+      "Premium"
+    ]
+  },
+
+  {
+    ja: "未払費用",
+    answer: "Accrued Expenses",
+    explanation:
+      "Accrued Expenses は、すでに費用が発生しているものの、まだ支払っていない費用です。",
+    choices: [
+      "Accrued Expenses",
+      "Prepaid Expenses",
+      "Accounts Receivable",
+      "Unearned Revenue"
+    ]
+  },
+
+  {
+    ja: "前払費用",
+    answer: "Prepaid Expenses",
+    explanation:
+      "Prepaid Expenses は、まだ費用として発生していないものの、先に支払った金額です。",
+    choices: [
+      "Prepaid Expenses",
+      "Accrued Expenses",
+      "Accounts Payable",
+      "Deferred Revenue"
+    ]
+  },
+
+  {
+    ja: "未収収益",
+    answer: "Accrued Revenue",
+    explanation:
+      "Accrued Revenue は、すでに収益が発生しているものの、まだ現金を受け取っていない収益です。",
+    choices: [
+      "Accrued Revenue",
+      "Unearned Revenue",
+      "Sales Revenue",
+      "Prepaid Revenue"
+    ]
+  },
+
+  {
+    ja: "前受収益",
+    answer: "Unearned Revenue",
+    explanation:
+      "Unearned Revenue は、現金を先に受け取っているものの、まだ収益として認識していない金額です。Deferred Revenue とも呼ばれます。",
+    choices: [
+      "Unearned Revenue",
+      "Accrued Revenue",
+      "Sales Revenue",
+      "Prepaid Expenses"
+    ]
+  },
+
+  {
+    ja: "支払利息",
+    answer: "Interest Expense",
+    explanation:
+      "Interest Expense は借入金などに対して発生する利息の費用です。",
+    choices: [
+      "Interest Expense",
+      "Interest Revenue",
+      "Finance Revenue",
+      "Dividend Expense"
+    ]
+  },
+
+  {
+    ja: "受取利息",
+    answer: "Interest Revenue",
+    explanation:
+      "Interest Revenue は預金や貸付金などから得られる利息収益です。",
+    choices: [
+      "Interest Revenue",
+      "Interest Expense",
+      "Dividend Expense",
+      "Sales Revenue"
+    ]
+  },
+
+  {
+    ja: "法人税等",
+    answer: "Income Tax Expense",
+    explanation:
+      "Income Tax Expense は企業が負担する法人所得税に関する費用です。",
+    choices: [
+      "Income Tax Expense",
+      "Tax Payable",
+      "Income Tax Revenue",
+      "Operating Expense"
+    ]
+  },
+
+  {
+    ja: "利益剰余金",
+    answer: "Retained Earnings",
+    explanation:
+      "Retained Earnings は、企業が獲得した利益のうち、配当などで社外に流出せず企業内に留保されている累積額です。",
+    choices: [
+      "Retained Earnings",
+      "Capital Stock",
+      "Treasury Stock",
+      "Net Income"
+    ]
+  },
+
+  {
+    ja: "資本金",
+    answer: "Capital Stock",
+    explanation:
+      "Capital Stock は株主から払い込まれた資本を表す株主持分の項目です。",
+    choices: [
+      "Capital Stock",
+      "Retained Earnings",
+      "Treasury Stock",
+      "Operating Income"
+    ]
+  },
+
+  {
+    ja: "自己株式",
+    answer: "Treasury Stock",
+    explanation:
+      "Treasury Stock は企業が自社の株式を買い戻して保有しているものです。通常、株主持分から控除されます。",
+    choices: [
+      "Treasury Stock",
+      "Capital Stock",
+      "Common Stock",
+      "Retained Earnings"
+    ]
+  },
+
+  {
+    ja: "営業利益",
+    answer: "Operating Income",
+    explanation:
+      "Operating Income は、本業による収益から売上原価や販売費及び一般管理費などの営業費用を差し引いた利益です。",
+    choices: [
+      "Operating Income",
+      "Net Income",
+      "Gross Profit",
+      "Operating Revenue"
+    ]
+  },
+
+  {
+    ja: "売上総利益",
+    answer: "Gross Profit",
+    explanation:
+      "Gross Profit は Sales Revenue などの売上高から Cost of Sales を差し引いた利益です。",
+    choices: [
+      "Gross Profit",
+      "Operating Income",
+      "Net Income",
+      "Retained Earnings"
+    ]
+  },
+
+  {
+    ja: "当期純利益",
+    answer: "Net Income",
+    explanation:
+      "Net Income は、収益からすべての費用・損失などを差し引いた最終的な利益です。",
+    choices: [
+      "Net Income",
+      "Gross Profit",
+      "Operating Income",
+      "Comprehensive Income"
+    ]
+  },
+
+  {
+    ja: "営業費用",
+    answer: "Operating Expenses",
+    explanation:
+      "Operating Expenses は企業の本業を運営するために発生する費用です。販売費及び一般管理費などが含まれます。",
+    choices: [
+      "Operating Expenses",
+      "Operating Income",
+      "Cost of Sales",
+      "Other Expenses"
+    ]
+  },
+
+  {
+    ja: "研究開発費",
+    answer: "Research and Development Expenses",
+    explanation:
+      "Research and Development Expenses は研究開発活動に関連する費用です。R&D Expenses と略されることもあります。",
+    choices: [
+      "Research and Development Expenses",
+      "Advertising Expenses",
+      "Operating Income",
+      "Development Revenue"
+    ]
+  }
+
+];
+
+
+// ============================
+// 学習データ
+// ============================
+
+let stats = JSON.parse(
+  localStorage.getItem("accountingTrainerStats")
+) || {
+  correct: 0,
+  total: 0
+};
+
+let memory = JSON.parse(
+  localStorage.getItem("accountingTrainerMemory")
+) || {};
+
+let current = null;
+let answered = false;
+
+
+// ============================
+// シャッフル
+// ============================
+
+function shuffle(array) {
+
+  const copy = [...array];
+
+  for (let i = copy.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [copy[i], copy[j]] =
+      [copy[j], copy[i]];
+  }
+
+  return copy;
+}
+
+
+// ============================
+// 問題選択
+// ============================
+
+function chooseQuestion() {
+
+  /*
+   * 間違えた問題を優先する。
+   * 間違いが多い問題ほど選ばれやすくする。
+   */
+
+  let weighted = [];
+
+  questions.forEach((q, index) => {
+
+    const m = memory[index] || {
+      wrong: 0,
+      correct: 0
+    };
+
+    let weight = 1 + (m.wrong * 3);
+
+    // まだ正解していない問題も少し優先
+    if (m.correct === 0) {
+      weight += 2;
+    }
+
+    for (let i = 0; i < weight; i++) {
+      weighted.push(index);
+    }
+
+  });
+
+  const index =
+    weighted[Math.floor(Math.random() * weighted.length)];
+
+  return index;
+}
+
+
+// ============================
+// 問題表示
+// ============================
+
+function showQuestion() {
+
+  answered = false;
+
+  const index = chooseQuestion();
+
+  current = index;
+
+  const q = questions[index];
+
+  document.getElementById("type").textContent =
+    "勘定科目";
+
+  document.getElementById("question").textContent =
+    q.ja;
+
+  document.getElementById("result").textContent =
+    "";
+
+  document.getElementById("explanation").innerHTML =
+    "";
+
+  document.getElementById("next").style.display =
+    "none";
+
+  const choices =
+    document.getElementById("choices");
+
+  choices.innerHTML = "";
+
+  shuffle(q.choices).forEach(choice => {
+
+    const button =
+      document.createElement("button");
+
+    button.textContent = choice;
+
+    button.className = "choice";
+
+    button.onclick =
+      () => answer(choice, button);
+
+    choices.appendChild(button);
+
+  });
+
+  updateStats();
+
+}
+
+
+// ============================
+// 回答
+// ============================
+
+function answer(choice, clickedButton) {
+
+  if (answered) return;
+
+  answered = true;
+
+  const q = questions[current];
+
+  const correct =
+    choice === q.answer;
+
+  stats.total++;
+
+  if (correct) {
+    stats.correct++;
+  }
+
+  if (!memory[current]) {
+    memory[current] = {
+      wrong: 0,
+      correct: 0
+    };
+  }
+
+  if (correct) {
+    memory[current].correct++;
+  } else {
+    memory[current].wrong++;
+  }
+
+  localStorage.setItem(
+    "accountingTrainerStats",
+    JSON.stringify(stats)
+  );
+
+  localStorage.setItem(
+    "accountingTrainerMemory",
+    JSON.stringify(memory)
+  );
+
+
+  // 全選択肢を確認
+  document.querySelectorAll(".choice")
+    .forEach(button => {
+
+      button.classList.add("disabled");
+
+      if (button.textContent === q.answer) {
+        button.classList.add("correct");
+      }
+
+    });
+
+
+  if (correct) {
+
+    clickedButton.classList.add("correct");
+
+    document.getElementById("result").textContent =
+      "🎉 正解！";
+
+  } else {
+
+    clickedButton.classList.add("wrong");
+
+    document.getElementById("result").textContent =
+      "❌ 不正解";
+
+  }
+
+
+  document.getElementById("explanation").innerHTML =
+
+    `<div class="answer-box">
+       <div class="answer-label">正解</div>
+       <div class="answer">${q.answer}</div>
+     </div>
+
+     <div style="margin-top:15px">
+       💡 ${q.explanation}
+     </div>`;
+
+
+  document.getElementById("next").style.display =
+    "block";
+
+  updateStats();
+
+}
+
+
+// ============================
+// 次の問題
+// ============================
+
+function nextQuestion() {
+
+  showQuestion();
+
+}
+
+
+// ============================
+// 統計表示
+// ============================
+
+function updateStats() {
+
+  document.getElementById("score").textContent =
+    stats.correct;
+
+  document.getElementById("total").textContent =
+    stats.total;
+
+  const rate =
+    stats.total === 0
+      ? 0
+      : Math.round(
+          stats.correct / stats.total * 100
+        );
+
+  document.getElementById("rate").textContent =
+    rate + "%";
+
+
+  // 10問ごとに進捗を表示
+  const progress =
+    Math.min(
+      (stats.total % 10) * 10,
+      100
+    );
+
+  document.getElementById("progressBar").style.width =
+    progress + "%";
+
+}
+
+
+// ============================
+// 学習記録リセット
+// ============================
+
+function resetData() {
+
+  const ok =
+    confirm(
+      "学習記録をすべてリセットしますか？"
+    );
+
+  if (!ok) return;
+
+  stats = {
+    correct: 0,
+    total: 0
+  };
+
+  memory = {};
+
+  localStorage.removeItem(
+    "accountingTrainerStats"
+  );
+
+  localStorage.removeItem(
+    "accountingTrainerMemory"
+  );
+
+  updateStats();
+
+  showQuestion();
+
+}
+
+
+// ============================
+// 起動
+// ============================
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
