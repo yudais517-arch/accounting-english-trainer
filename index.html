@@ -2,261 +2,373 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#101217">
+
 <title>Accounting English Trainer</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  background:#101217;
+}
 
 body{
-margin:0;
-background:#101217;
-color:#fff;
-font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-}
-
-main{
-max-width:620px;
-margin:auto;
-padding:22px 16px 60px;
-}
-
-h1{
-text-align:center;
-font-size:27px;
-margin:8px 0 4px;
-}
-
-.subtitle{
-text-align:center;
-color:#999;
-margin-bottom:20px;
-}
-
-nav{
-display:flex;
-gap:8px;
-margin-bottom:15px;
-}
-
-nav button{
-flex:1;
+  margin:0;
+  background:#101217;
+  color:#fff;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 
 button{
-border:0;
-border-radius:13px;
-padding:14px;
-font-size:15px;
-font-weight:bold;
-background:#292e38;
-color:white;
+  font-family:inherit;
+  cursor:pointer;
+  -webkit-appearance:none;
 }
 
-button:active{
-transform:scale(.98);
+main{
+  width:100%;
+  max-width:620px;
+  margin:0 auto;
+  padding:
+    22px
+    16px
+    calc(70px + env(safe-area-inset-bottom));
+}
+
+/* ---------- Header ---------- */
+
+h1{
+  margin:8px 0 4px;
+  text-align:center;
+  font-size:27px;
+  line-height:1.3;
+}
+
+.subtitle{
+  margin-bottom:20px;
+  text-align:center;
+  color:#999;
+  font-size:14px;
+}
+
+/* ---------- Navigation ---------- */
+
+nav{
+  display:flex;
+  gap:8px;
+  margin-bottom:15px;
+}
+
+nav button{
+  flex:1;
+  border:0;
+  border-radius:13px;
+  padding:14px 8px;
+  background:#292e38;
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
 }
 
 nav button.active{
-background:#fff;
-color:#111;
+  background:#fff;
+  color:#111;
 }
 
+/* ---------- Stats ---------- */
+
 .stats{
-display:flex;
-gap:8px;
-margin-bottom:14px;
+  display:flex;
+  gap:8px;
+  margin-bottom:14px;
 }
 
 .stat{
-flex:1;
-background:#1c2028;
-border-radius:14px;
-padding:11px 5px;
-text-align:center;
+  flex:1;
+  min-width:0;
+  padding:11px 5px;
+  background:#1c2028;
+  border-radius:14px;
+  text-align:center;
 }
 
 .stat-number{
-font-size:20px;
-font-weight:bold;
+  font-size:20px;
+  font-weight:bold;
 }
 
 .stat-label{
-font-size:11px;
-color:#999;
-margin-top:3px;
+  margin-top:3px;
+  color:#999;
+  font-size:11px;
 }
 
+/* ---------- Card ---------- */
+
 .card{
-background:#1c2028;
-border-radius:20px;
-padding:22px 17px;
+  padding:22px 17px;
+  background:#1c2028;
+  border-radius:20px;
 }
 
 .type{
-font-size:13px;
-color:#888;
+  color:#888;
+  font-size:13px;
 }
 
 .question{
-font-size:29px;
-font-weight:bold;
-line-height:1.4;
-margin:18px 0 22px;
+  min-height:82px;
+  margin:18px 0 22px;
+  font-size:29px;
+  font-weight:bold;
+  line-height:1.4;
+  display:flex;
+  align-items:center;
 }
 
+/* ---------- Choices ---------- */
+
 .choices{
-display:grid;
-gap:10px;
+  display:grid;
+  gap:10px;
 }
 
 .choice{
-text-align:left;
-background:#292e38;
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:15px;
+  background:#292e38;
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+  text-align:left;
+  line-height:1.45;
+}
+
+.choice:active{
+  transform:scale(.98);
 }
 
 .choice.correct{
-background:#18794e;
+  background:#18794e;
 }
 
 .choice.wrong{
-background:#a83d3d;
+  background:#a83d3d;
 }
 
 .choice.disabled{
-opacity:.65;
+  opacity:.65;
 }
 
+/* ---------- Result ---------- */
+
 #result{
-font-size:20px;
-font-weight:bold;
-text-align:center;
-margin-top:18px;
+  min-height:29px;
+  margin-top:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
 }
 
 #explanation{
-color:#ccc;
-font-size:14px;
-line-height:1.7;
-margin-top:12px;
+  margin-top:12px;
+  color:#ccc;
+  font-size:14px;
+  line-height:1.7;
 }
 
 .answerbox{
-background:#14171c;
-padding:14px;
-border-radius:13px;
-margin-top:12px;
+  margin-top:12px;
+  padding:14px;
+  background:#14171c;
+  border-radius:13px;
 }
 
 .answerlabel{
-font-size:12px;
-color:#888;
+  color:#888;
+  font-size:12px;
 }
 
 .answer{
-font-size:21px;
-font-weight:bold;
-margin-top:4px;
+  margin-top:4px;
+  font-size:20px;
+  font-weight:bold;
+  line-height:1.4;
 }
 
 #next{
-display:none;
-width:100%;
-margin-top:17px;
-background:#fff;
-color:#111;
+  display:none;
+  width:100%;
+  margin-top:17px;
+  border:0;
+  border-radius:13px;
+  padding:15px;
+  background:#fff;
+  color:#111;
+  font-size:15px;
+  font-weight:bold;
 }
 
+/* ---------- Analysis ---------- */
+
 .section{
-background:#1c2028;
-border-radius:18px;
-padding:18px;
-margin-bottom:13px;
+  margin-bottom:13px;
+  padding:18px;
+  background:#1c2028;
+  border-radius:18px;
 }
 
 .section h2{
-font-size:18px;
-margin:0 0 14px;
-}
-
-.barrow{
-margin-bottom:14px;
-}
-
-.bartitle{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin-bottom:5px;
-}
-
-.bar{
-height:8px;
-background:#30343d;
-border-radius:8px;
-overflow:hidden;
-}
-
-.fill{
-height:100%;
-background:#888;
-border-radius:8px;
-}
-
-.weak{
-display:flex;
-justify-content:space-between;
-padding:11px 0;
-border-bottom:1px solid #30343d;
-font-size:14px;
-}
-
-.weak:last-child{
-border-bottom:0;
-}
-
-.red{
-color:#ff8c8c;
-font-weight:bold;
-}
-
-.green{
-color:#80d7aa;
-font-weight:bold;
+  margin:0 0 14px;
+  font-size:18px;
 }
 
 .bigscore{
-font-size:42px;
-font-weight:bold;
-text-align:center;
-margin:5px 0;
+  margin:5px 0;
+  text-align:center;
+  font-size:42px;
+  font-weight:bold;
 }
 
 .center{
-text-align:center;
-color:#999;
-font-size:13px;
+  text-align:center;
+  color:#999;
+  font-size:13px;
+  line-height:1.7;
 }
+
+/* ---------- Bars ---------- */
+
+.barrow{
+  margin-bottom:15px;
+}
+
+.barrow:last-child{
+  margin-bottom:0;
+}
+
+.bartitle{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:5px;
+  font-size:13px;
+}
+
+.bar{
+  height:8px;
+  overflow:hidden;
+  background:#30343d;
+  border-radius:8px;
+}
+
+.fill{
+  height:100%;
+  background:#888;
+  border-radius:8px;
+}
+
+/* ---------- Weak questions ---------- */
+
+.weak{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid #30343d;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.weak:last-child{
+  border-bottom:0;
+}
+
+.weak-main{
+  min-width:0;
+}
+
+.weak-en{
+  margin-top:2px;
+  color:#888;
+  font-size:12px;
+}
+
+.red{
+  color:#ff8c8c;
+  font-weight:bold;
+}
+
+.green{
+  color:#80d7aa;
+  font-weight:bold;
+}
+
+/* ---------- Buttons ---------- */
 
 .reset{
-width:100%;
-margin-top:15px;
-background:transparent;
-border:1px solid #444;
-color:#999;
+  width:100%;
+  margin-top:15px;
+  border:1px solid #444;
+  border-radius:13px;
+  padding:14px;
+  background:transparent;
+  color:#999;
+  font-size:14px;
 }
 
+.review{
+  width:100%;
+  margin-bottom:13px;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  background:#fff;
+  color:#111;
+  font-size:15px;
+  font-weight:bold;
+}
+
+/* ---------- Utility ---------- */
+
 .hidden{
-display:none;
+  display:none !important;
 }
 
 .small{
-font-size:12px;
-color:#888;
-line-height:1.6;
+  color:#888;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.message{
+  padding:10px 0;
+  color:#aaa;
+  text-align:center;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.streak{
+  margin-top:5px;
+  color:#aaa;
+  text-align:center;
+  font-size:12px;
 }
 </style>
 </head>
+
 
 <body>
 
@@ -268,22 +380,38 @@ line-height:1.6;
 会計英語トレーナー
 </div>
 
+
+<!-- =========================
+     ナビゲーション
+========================= -->
+
 <nav>
-<button id="studyTab" class="active" onclick="showStudy()">
+
+<button
+  id="studyTab"
+  class="active"
+  type="button"
+  onclick="showStudy()"
+>
 📖 学習
 </button>
 
-<button id="analysisTab" onclick="showAnalysis()">
+<button
+  id="analysisTab"
+  type="button"
+  onclick="showAnalysis()"
+>
 🧠 自己分析
 </button>
+
 </nav>
 
 
-<!-- ==================== -->
-<!-- 学習画面 -->
-<!-- ==================== -->
+<!-- =========================
+     学習画面
+========================= -->
 
-<div id="study">
+<section id="study">
 
 <div class="stats">
 
@@ -305,42 +433,68 @@ line-height:1.6;
 </div>
 
 
+<div class="streak" id="streak">
+連続正解 0問
+</div>
+
+
 <div class="card">
 
-<div class="type">
+<div class="type" id="questionType">
 日本語 → 会計英語
 </div>
 
-<div class="question" id="question">
+
+<div
+  class="question"
+  id="question"
+>
 読み込み中...
 </div>
 
-<div class="choices" id="choices"></div>
+
+<div
+  class="choices"
+  id="choices"
+></div>
+
 
 <div id="result"></div>
 
 <div id="explanation"></div>
 
-<button id="next" onclick="nextQuestion()">
+
+<button
+  id="next"
+  type="button"
+  onclick="nextQuestion()"
+>
 次の問題 →
 </button>
 
 </div>
 
-</div>
+</section>
 
 
-<!-- ==================== -->
-<!-- 自己分析画面 -->
-<!-- ==================== -->
+<!-- =========================
+     自己分析画面
+========================= -->
 
-<div id="analysis" class="hidden">
+<section
+  id="analysis"
+  class="hidden"
+>
+
 
 <div class="section">
 
 <h2>📊 総合成績</h2>
 
-<div class="bigscore" id="analysisRate">
+<div
+  class="bigscore"
+  id="analysisRate"
+>
 0%
 </div>
 
@@ -348,7 +502,24 @@ line-height:1.6;
 総合正答率
 </div>
 
+<div
+  class="center"
+  id="analysisSummary"
+  style="margin-top:8px;"
+>
+まだ学習データがありません。
 </div>
+
+</div>
+
+
+<button
+  class="review"
+  type="button"
+  onclick="startWeakReview()"
+>
+🔥 苦手問題だけ練習する
+</button>
 
 
 <div class="section">
@@ -387,1227 +558,2121 @@ line-height:1.6;
 </div>
 
 
-<button class="reset" onclick="resetData()">
+<button
+  class="reset"
+  type="button"
+  onclick="resetData()"
+>
 学習記録をリセット
 </button>
 
-</div>
+</section>
 
 </main>
 
 
 <script>
 
-/* ==================================================
+/* =========================================================
+   Accounting English Trainer
+   完全版
+========================================================= */
+
+
+/* =========================================================
    問題データ
-================================================== */
-
-const questions=[
-
-/* 資産 */
-
-{
-ja:"現金",
-en:"Cash",
-cat:"資産",
-tags:["cash"],
-ex:"Cash は現金を意味します。"
-},
-
-{
-ja:"売掛金",
-en:"Accounts Receivable",
-cat:"資産",
-tags:["receivable"],
-ex:"Accounts Receivable は、掛け販売によって将来回収する権利です。A/R と略されることがあります。"
-},
-
-{
-ja:"受取手形",
-en:"Notes Receivable",
-cat:"資産",
-tags:["receivable","notes"],
-ex:"Notes Receivable は、手形によって受け取る権利を表します。"
-},
-
-{
-ja:"棚卸資産",
-en:"Inventory",
-cat:"資産",
-tags:["inventory"],
-ex:"Inventory は販売を目的として保有する商品・製品などです。"
-},
-
-{
-ja:"前払費用",
-en:"Prepaid Expenses",
-cat:"資産",
-tags:["prepaid"],
-ex:"Prepaid Expenses は、将来の費用に対応するため先に支払った金額です。"
-},
-
-{
-ja:"固定資産",
-en:"Property, Plant and Equipment",
-cat:"資産",
-tags:["fixed-assets"],
-ex:"Property, Plant and Equipment は有形固定資産を表し、PP&E と略されることがあります。"
-},
-
-{
-ja:"無形固定資産",
-en:"Intangible Assets",
-cat:"資産",
-tags:["intangible"],
-ex:"Intangible Assets は物理的な形を持たない資産です。"
-},
-
-{
-ja:"のれん",
-en:"Goodwill",
-cat:"資産",
-tags:["goodwill"],
-ex:"Goodwill は企業買収などで生じる代表的な無形資産です。"
-},
-
-/* 負債 */
-
-{
-ja:"買掛金",
-en:"Accounts Payable",
-cat:"負債",
-tags:["payable"],
-ex:"Accounts Payable は、掛けで購入したことによる支払義務です。A/P と略されることがあります。"
-},
-
-{
-ja:"支払手形",
-en:"Notes Payable",
-cat:"負債",
-tags:["payable","notes"],
-ex:"Notes Payable は、手形による支払義務です。"
-},
-
-{
-ja:"未払費用",
-en:"Accrued Expenses",
-cat:"負債",
-tags:["accrued"],
-ex:"Accrued Expenses は、すでに発生しているもののまだ支払っていない費用です。"
-},
-
-{
-ja:"前受収益",
-en:"Unearned Revenue",
-cat:"負債",
-tags:["unearned"],
-ex:"Unearned Revenue は、先に受け取ったものの、まだ収益として認識していない金額です。Deferred Revenue ともいいます。"
-},
-
-/* 純資産 */
-
-{
-ja:"資本金",
-en:"Capital Stock",
-cat:"純資産",
-tags:["capital"],
-ex:"Capital Stock は株主から払い込まれた資本を表します。"
-},
-
-{
-ja:"資本剰余金",
-en:"Capital Surplus",
-cat:"純資産",
-tags:["capital","surplus"],
-ex:"Capital Surplus は資本取引から生じる剰余金です。"
-},
-
-{
-ja:"資本準備金",
-en:"Capital Reserve",
-cat:"純資産",
-tags:["capital","reserve"],
-ex:"Capital Reserve は資本剰余金のうち準備金として計上されるものです。"
-},
-
-{
-ja:"利益剰余金",
-en:"Retained Earnings",
-cat:"純資産",
-tags:["retained","earnings"],
-ex:"Retained Earnings は企業内に留保されている利益の累積額です。"
-},
-
-{
-ja:"利益準備金",
-en:"Legal Reserve",
-cat:"純資産",
-tags:["reserve"],
-ex:"Legal Reserve は法律に基づいて積み立てられる準備金です。"
-},
-
-{
-ja:"任意積立金",
-en:"Voluntary Reserves",
-cat:"純資産",
-tags:["reserve"],
-ex:"Voluntary Reserves は企業が任意に積み立てる準備金です。"
-},
-
-{
-ja:"自己株式",
-en:"Treasury Stock",
-cat:"純資産",
-tags:["treasury","stock"],
-ex:"Treasury Stock は企業が買い戻して保有している自社株式です。"
-},
-
-/* 収益 */
-
-{
-ja:"売上",
-en:"Sales Revenue",
-cat:"収益",
-tags:["sales","revenue"],
-ex:"Sales Revenue は商品・サービスの販売によって得られる収益です。"
-},
-
-{
-ja:"受取利息",
-en:"Interest Revenue",
-cat:"収益",
-tags:["interest","revenue"],
-ex:"Interest Revenue は預金や貸付金などから得られる利息収益です。"
-},
-
-{
-ja:"受取配当金",
-en:"Dividend Income",
-cat:"収益",
-tags:["dividend","income"],
-ex:"Dividend Income は株式などから受け取る配当による収益です。"
-},
-
-{
-ja:"有価証券売却益",
-en:"Gain on Sale of Securities",
-cat:"収益",
-tags:["gain","securities"],
-ex:"Gain は資産の売却などによって生じる利益を表します。"
-},
-
-{
-ja:"有価証券評価益",
-en:"Gain on Valuation of Securities",
-cat:"収益",
-tags:["gain","valuation"],
-ex:"Gain on Valuation は有価証券の評価によって生じる利益です。"
-},
-
-{
-ja:"固定資産売却益",
-en:"Gain on Sale of Fixed Assets",
-cat:"収益",
-tags:["gain","fixed-assets"],
-ex:"固定資産を帳簿価額より高く売却した場合などに生じる利益です。"
-},
-
-{
-ja:"土地売却益",
-en:"Gain on Sale of Land",
-cat:"収益",
-tags:["gain","land"],
-ex:"土地の売却によって生じる利益です。"
-},
-
-{
-ja:"貸倒引当金戻入益",
-en:"Reversal of Allowance for Doubtful Accounts",
-cat:"収益",
-tags:["reversal","allowance"],
-ex:"過去に設定した貸倒引当金が不要になった場合などに戻し入れる利益です。"
-},
-
-{
-ja:"社債償還益",
-en:"Gain on Redemption of Bonds",
-cat:"収益",
-tags:["gain","bonds"],
-ex:"社債を額面より低い金額で償還した場合などに生じる利益です。"
-},
-
-{
-ja:"保険差益",
-en:"Gain on Insurance",
-cat:"収益",
-tags:["gain","insurance"],
-ex:"保険金額などと損失額との差額から生じる利益です。"
-},
-
-{
-ja:"国庫補助金受贈益",
-en:"Gain on Receipt of Government Subsidies",
-cat:"収益",
-tags:["gain","subsidy"],
-ex:"政府から補助金を受け取ったことによって生じる利益です。"
-},
-
-{
-ja:"雑益",
-en:"Miscellaneous Income",
-cat:"収益",
-tags:["miscellaneous","income"],
-ex:"本業以外から生じる少額・臨時的な収益などに使われます。"
-},
-
-/* 費用 */
-
-{
-ja:"退職給付費用",
-en:"Retirement Benefit Expense",
-cat:"費用",
-tags:["retirement","expense"],
-ex:"Retirement Benefit Expense は退職給付に関する費用です。"
-},
-
-{
-ja:"貸倒引当金繰入額",
-en:"Provision for Doubtful Accounts",
-cat:"費用",
-tags:["provision","allowance"],
-ex:"将来発生する可能性のある貸倒れに備えて計上する費用です。"
-},
-
-{
-ja:"手形売却損",
-en:"Loss on Sale of Notes Receivable",
-cat:"費用",
-tags:["loss","notes"],
-ex:"受取手形を売却・割り引くことによって生じる損失です。"
-},
-
-{
-ja:"支払手数料",
-en:"Commission Expense",
-cat:"費用",
-tags:["commission","expense"],
-ex:"手数料の支払いによって発生する費用です。"
-},
-
-{
-ja:"支払利息",
-en:"Interest Expense",
-cat:"費用",
-tags:["interest","expense"],
-ex:"借入金などに対して支払う利息に関する費用です。"
-},
-
-{
-ja:"社債利息",
-en:"Interest on Bonds",
-cat:"費用",
-tags:["interest","bonds"],
-ex:"発行した社債について発生する利息です。"
-},
-
-{
-ja:"ソフトウェア償却",
-en:"Amortization of Software",
-cat:"費用",
-tags:["amortization","software"],
-ex:"ソフトウェアの取得原価を利用期間にわたって費用配分するものです。"
-},
-
-{
-ja:"創立費",
-en:"Organization Expenses",
-cat:"費用",
-tags:["organization","expense"],
-ex:"会社設立のために支出した費用です。"
-},
-
-{
-ja:"開業費",
-en:"Business Commencement Expenses",
-cat:"費用",
-tags:["commencement","expense"],
-ex:"会社設立後、営業開始までに支出した費用です。"
-},
-
-{
-ja:"開発費",
-en:"Development Expenses",
-cat:"費用",
-tags:["development","expense"],
-ex:"新技術・新製品などの開発に関連する費用です。"
-},
-
-{
-ja:"株式発行費",
-en:"Share Issuance Costs",
-cat:"費用",
-tags:["share","issuance"],
-ex:"株式を発行するために直接支出した費用です。"
-},
-
-{
-ja:"社債発行費",
-en:"Bond Issuance Costs",
-cat:"費用",
-tags:["bond","issuance"],
-ex:"社債を発行するために支出する費用です。"
-},
-
-{
-ja:"雑損",
-en:"Miscellaneous Loss",
-cat:"費用",
-tags:["miscellaneous","loss"],
-ex:"本業以外から生じる少額・臨時的な損失などに使われます。"
-},
-
-/* その他 */
-
-{
-ja:"為替差損益",
-en:"Foreign Exchange Gain or Loss",
-cat:"その他",
-tags:["foreign-exchange","gain","loss"],
-ex:"外貨建取引などで為替レートが変動することによって生じる損益です。"
-},
-
-{
-ja:"有価証券利息",
-en:"Interest on Securities",
-cat:"その他",
-tags:["interest","securities"],
-ex:"債券などの有価証券から受け取る利息です。"
-},
-
-{
-ja:"有価証券運用損益",
-en:"Gain or Loss on Investment in Securities",
-cat:"その他",
-tags:["gain","loss","securities"],
-ex:"有価証券の運用によって生じる損益を表します。"
-},
-
-{
-ja:"その他資本剰余金",
-en:"Other Capital Surplus",
-cat:"純資産",
-tags:["capital","surplus"],
-ex:"資本剰余金のうち資本準備金以外のものです。"
-},
-
-{
-ja:"自己株式処分差損",
-en:"Loss on Disposal of Treasury Shares",
-cat:"純資産",
-tags:["treasury","loss"],
-ex:"自己株式を処分した際に生じる差損です。"
-},
-
-{
-ja:"自己株式処分差益",
-en:"Gain on Disposal of Treasury Shares",
-cat:"純資産",
-tags:["treasury","gain"],
-ex:"自己株式を処分した際に生じる差益です。"
-},
-
-{
-ja:"その他有価証券評価差額金",
-en:"Valuation Difference on Available-for-Sale Securities",
-cat:"純資産",
-tags:["valuation","securities"],
-ex:"その他有価証券の評価差額を表す純資産項目です。"
-},
-
-{
-ja:"繰延ヘッジ損益",
-en:"Deferred Gains or Losses on Hedges",
-cat:"純資産",
-tags:["hedge","gain","loss"],
-ex:"ヘッジ会計において繰り延べられる評価損益です。"
-},
-
-{
-ja:"新株予約権",
-en:"Stock Acquisition Rights",
-cat:"純資産",
-tags:["stock","rights"],
-ex:"一定の条件で会社の株式を取得できる権利です。"
-},
-
-{
-ja:"現金過不足",
-en:"Cash Over and Short",
-cat:"その他",
-tags:["cash"],
-ex:"実際の現金残高と帳簿残高の差額を処理する勘定です。"
-},
-
-{
-ja:"仮受金",
-en:"Suspense Receipts",
-cat:"負債",
-tags:["suspense"],
-ex:"内容や相手勘定がまだ確定していない入金を一時的に処理する勘定です。"
-},
-
-{
-ja:"仮払金",
-en:"Temporary Payments",
-cat:"資産",
-tags:["temporary"],
-ex:"支払内容や金額がまだ確定していない支出を一時的に処理する勘定です。"
-},
-
-{
-ja:"仮払法人税等",
-en:"Income Taxes Paid in Advance",
-cat:"資産",
-tags:["tax","prepaid"],
-ex:"法人税等の中間納付など、確定前に支払った税金です。"
-},
-
-{
-ja:"火災未決算",
-en:"Fire Loss Pending Settlement",
-cat:"その他",
-tags:["fire","loss"],
-ex:"火災による損失について、保険金などがまだ確定していない場合に一時的に処理する勘定です。"
-
-}
+========================================================= */
+
+const questions = [
+
+  {
+    ja:"現金",
+    en:"Cash",
+    cat:"資産",
+    tags:["cash"],
+    ex:"Cash は現金を意味します。"
+  },
+
+  {
+    ja:"売掛金",
+    en:"Accounts Receivable",
+    cat:"資産",
+    tags:["receivable"],
+    ex:"Accounts Receivable は、掛け販売によって将来回収する権利です。A/R と略されることがあります。"
+  },
+
+  {
+    ja:"受取手形",
+    en:"Notes Receivable",
+    cat:"資産",
+    tags:["receivable","notes"],
+    ex:"Notes Receivable は、手形によって受け取る権利を表します。"
+  },
+
+  {
+    ja:"棚卸資産",
+    en:"Inventory",
+    cat:"資産",
+    tags:["inventory"],
+    ex:"Inventory は販売を目的として保有する商品・製品などです。"
+  },
+
+  {
+    ja:"前払費用",
+    en:"Prepaid Expenses",
+    cat:"資産",
+    tags:["prepaid"],
+    ex:"Prepaid Expenses は、将来の費用に対応するため先に支払った金額です。"
+  },
+
+  {
+    ja:"固定資産",
+    en:"Property, Plant and Equipment",
+    cat:"資産",
+    tags:["fixed-assets"],
+    ex:"Property, Plant and Equipment は有形固定資産を表し、PP&E と略されることがあります。"
+  },
+
+  {
+    ja:"無形固定資産",
+    en:"Intangible Assets",
+    cat:"資産",
+    tags:["intangible"],
+    ex:"Intangible Assets は物理的な形を持たない資産です。"
+  },
+
+  {
+    ja:"のれん",
+    en:"Goodwill",
+    cat:"資産",
+    tags:["goodwill"],
+    ex:"Goodwill は企業買収などで生じる代表的な無形資産です。"
+  },
+
+
+  /* 負債 */
+
+  {
+    ja:"買掛金",
+    en:"Accounts Payable",
+    cat:"負債",
+    tags:["payable"],
+    ex:"Accounts Payable は、掛けで購入したことによる支払義務です。A/P と略されることがあります。"
+  },
+
+  {
+    ja:"支払手形",
+    en:"Notes Payable",
+    cat:"負債",
+    tags:["payable","notes"],
+    ex:"Notes Payable は、手形による支払義務です。"
+  },
+
+  {
+    ja:"未払費用",
+    en:"Accrued Expenses",
+    cat:"負債",
+    tags:["accrued"],
+    ex:"Accrued Expenses は、すでに発生しているもののまだ支払っていない費用です。"
+  },
+
+  {
+    ja:"前受収益",
+    en:"Unearned Revenue",
+    cat:"負債",
+    tags:["unearned"],
+    ex:"Unearned Revenue は、先に受け取ったものの、まだ収益として認識していない金額です。Deferred Revenue ともいいます。"
+  },
+
+
+  /* 純資産 */
+
+  {
+    ja:"資本金",
+    en:"Capital Stock",
+    cat:"純資産",
+    tags:["capital"],
+    ex:"Capital Stock は株主から払い込まれた資本を表します。"
+  },
+
+  {
+    ja:"資本剰余金",
+    en:"Capital Surplus",
+    cat:"純資産",
+    tags:["capital","surplus"],
+    ex:"Capital Surplus は資本取引から生じる剰余金です。"
+  },
+
+  {
+    ja:"資本準備金",
+    en:"Capital Reserve",
+    cat:"純資産",
+    tags:["capital","reserve"],
+    ex:"Capital Reserve は資本剰余金のうち準備金として計上されるものです。"
+  },
+
+  {
+    ja:"その他資本剰余金",
+    en:"Other Capital Surplus",
+    cat:"純資産",
+    tags:["capital","surplus"],
+    ex:"その他資本剰余金は、資本剰余金のうち資本準備金以外のものです。"
+  },
+
+  {
+    ja:"利益剰余金",
+    en:"Retained Earnings",
+    cat:"純資産",
+    tags:["retained","earnings"],
+    ex:"Retained Earnings は企業内に留保されている利益の累積額です。"
+  },
+
+  {
+    ja:"利益準備金",
+    en:"Legal Reserve",
+    cat:"純資産",
+    tags:["reserve"],
+    ex:"Legal Reserve は法律に基づいて積み立てられる準備金です。"
+  },
+
+  {
+    ja:"任意積立金",
+    en:"Voluntary Reserves",
+    cat:"純資産",
+    tags:["reserve"],
+    ex:"Voluntary Reserves は企業が任意に積み立てる準備金です。"
+  },
+
+  {
+    ja:"自己株式",
+    en:"Treasury Stock",
+    cat:"純資産",
+    tags:["treasury","stock"],
+    ex:"Treasury Stock は企業が買い戻して保有している自社株式です。"
+  },
+
+  {
+    ja:"自己株式処分差損",
+    en:"Loss on Disposal of Treasury Shares",
+    cat:"純資産",
+    tags:["treasury","loss"],
+    ex:"自己株式を処分した際に生じる差損です。"
+  },
+
+  {
+    ja:"自己株式処分差益",
+    en:"Gain on Disposal of Treasury Shares",
+    cat:"純資産",
+    tags:["treasury","gain"],
+    ex:"自己株式を処分した際に生じる差益です。"
+  },
+
+  {
+    ja:"その他有価証券評価差額金",
+    en:"Valuation Difference on Available-for-Sale Securities",
+    cat:"純資産",
+    tags:["valuation","securities"],
+    ex:"その他有価証券の評価差額を表す純資産項目です。"
+  },
+
+  {
+    ja:"繰延ヘッジ損益",
+    en:"Deferred Gains or Losses on Hedges",
+    cat:"純資産",
+    tags:["hedge","gain","loss"],
+    ex:"ヘッジ会計において繰り延べられる評価損益です。"
+  },
+
+  {
+    ja:"新株予約権",
+    en:"Stock Acquisition Rights",
+    cat:"純資産",
+    tags:["stock","rights"],
+    ex:"一定の条件で会社の株式を取得できる権利です。"
+  },
+
+
+  /* 収益 */
+
+  {
+    ja:"売上",
+    en:"Sales Revenue",
+    cat:"収益",
+    tags:["sales","revenue"],
+    ex:"Sales Revenue は商品・サービスの販売によって得られる収益です。"
+  },
+
+  {
+    ja:"受取利息",
+    en:"Interest Revenue",
+    cat:"収益",
+    tags:["interest","revenue"],
+    ex:"Interest Revenue は預金や貸付金などから得られる利息収益です。"
+  },
+
+  {
+    ja:"受取配当金",
+    en:"Dividend Income",
+    cat:"収益",
+    tags:["dividend","income"],
+    ex:"Dividend Income は株式などから受け取る配当による収益です。"
+  },
+
+  {
+    ja:"有価証券売却益",
+    en:"Gain on Sale of Securities",
+    cat:"収益",
+    tags:["gain","securities"],
+    ex:"Gain は資産の売却などによって生じる利益を表します。"
+  },
+
+  {
+    ja:"有価証券評価益",
+    en:"Gain on Valuation of Securities",
+    cat:"収益",
+    tags:["gain","valuation"],
+    ex:"Gain on Valuation は有価証券の評価によって生じる利益です。"
+  },
+
+  {
+    ja:"固定資産売却益",
+    en:"Gain on Sale of Fixed Assets",
+    cat:"収益",
+    tags:["gain","fixed-assets"],
+    ex:"固定資産を帳簿価額より高く売却した場合などに生じる利益です。"
+  },
+
+  {
+    ja:"土地売却益",
+    en:"Gain on Sale of Land",
+    cat:"収益",
+    tags:["gain","land"],
+    ex:"土地の売却によって生じる利益です。"
+  },
+
+  {
+    ja:"貸倒引当金戻入益",
+    en:"Reversal of Allowance for Doubtful Accounts",
+    cat:"収益",
+    tags:["reversal","allowance"],
+    ex:"過去に設定した貸倒引当金が不要になった場合などに戻し入れる利益です。"
+  },
+
+  {
+    ja:"社債償還益",
+    en:"Gain on Redemption of Bonds",
+    cat:"収益",
+    tags:["gain","bonds"],
+    ex:"社債を額面より低い金額で償還した場合などに生じる利益です。"
+  },
+
+  {
+    ja:"保険差益",
+    en:"Gain on Insurance",
+    cat:"収益",
+    tags:["gain","insurance"],
+    ex:"保険金額などと損失額との差額から生じる利益です。"
+  },
+
+  {
+    ja:"国庫補助金受贈益",
+    en:"Gain on Receipt of Government Subsidies",
+    cat:"収益",
+    tags:["gain","subsidy"],
+    ex:"政府から補助金を受け取ったことによって生じる利益です。"
+  },
+
+  {
+    ja:"雑益",
+    en:"Miscellaneous Income",
+    cat:"収益",
+    tags:["miscellaneous","income"],
+    ex:"本業以外から生じる少額・臨時的な収益などに使われます。"
+  },
+
+
+  /* 費用 */
+
+  {
+    ja:"退職給付費用",
+    en:"Retirement Benefit Expense",
+    cat:"費用",
+    tags:["retirement","expense"],
+    ex:"Retirement Benefit Expense は退職給付に関する費用です。"
+  },
+
+  {
+    ja:"貸倒引当金繰入額",
+    en:"Provision for Doubtful Accounts",
+    cat:"費用",
+    tags:["provision","allowance"],
+    ex:"将来発生する可能性のある貸倒れに備えて計上する費用です。"
+  },
+
+  {
+    ja:"手形売却損",
+    en:"Loss on Sale of Notes Receivable",
+    cat:"費用",
+    tags:["loss","notes"],
+    ex:"受取手形を売却・割り引くことによって生じる損失です。"
+  },
+
+  {
+    ja:"支払手数料",
+    en:"Commission Expense",
+    cat:"費用",
+    tags:["commission","expense"],
+    ex:"手数料の支払いによって発生する費用です。"
+  },
+
+  {
+    ja:"支払利息",
+    en:"Interest Expense",
+    cat:"費用",
+    tags:["interest","expense"],
+    ex:"借入金などに対して支払う利息に関する費用です。"
+  },
+
+  {
+    ja:"社債利息",
+    en:"Interest on Bonds",
+    cat:"費用",
+    tags:["interest","bonds"],
+    ex:"発行した社債について発生する利息です。"
+  },
+
+  {
+    ja:"ソフトウェア償却",
+    en:"Amortization of Software",
+    cat:"費用",
+    tags:["amortization","software"],
+    ex:"ソフトウェアの取得原価を利用期間にわたって費用配分するものです。"
+  },
+
+  {
+    ja:"創立費",
+    en:"Organization Expenses",
+    cat:"費用",
+    tags:["organization","expense"],
+    ex:"会社設立のために支出した費用です。"
+  },
+
+  {
+    ja:"開業費",
+    en:"Business Commencement Expenses",
+    cat:"費用",
+    tags:["commencement","expense"],
+    ex:"会社設立後、営業開始までに支出した費用です。"
+  },
+
+  {
+    ja:"開発費",
+    en:"Development Expenses",
+    cat:"費用",
+    tags:["development","expense"],
+    ex:"新技術・新製品などの開発に関連する費用です。"
+  },
+
+  {
+    ja:"株式発行費",
+    en:"Share Issuance Costs",
+    cat:"費用",
+    tags:["share","issuance"],
+    ex:"株式を発行するために直接支出した費用です。"
+  },
+
+  {
+    ja:"社債発行費",
+    en:"Bond Issuance Costs",
+    cat:"費用",
+    tags:["bond","issuance"],
+    ex:"社債を発行するために支出する費用です。"
+  },
+
+  {
+    ja:"雑損",
+    en:"Miscellaneous Loss",
+    cat:"費用",
+    tags:["miscellaneous","loss"],
+    ex:"本業以外から生じる少額・臨時的な損失などに使われます。"
+  },
+
+
+  /* その他 */
+
+  {
+    ja:"為替差損益",
+    en:"Foreign Exchange Gain or Loss",
+    cat:"その他",
+    tags:["foreign-exchange","gain","loss"],
+    ex:"外貨建取引などで為替レートが変動することによって生じる損益です。"
+  },
+
+  {
+    ja:"有価証券利息",
+    en:"Interest on Securities",
+    cat:"その他",
+    tags:["interest","securities"],
+    ex:"債券などの有価証券から受け取る利息です。"
+  },
+
+  {
+    ja:"有価証券運用損益",
+    en:"Gain or Loss on Investment in Securities",
+    cat:"その他",
+    tags:["gain","loss","securities"],
+    ex:"有価証券の運用によって生じる損益を表します。"
+  },
+
+  {
+    ja:"現金過不足",
+    en:"Cash Over and Short",
+    cat:"その他",
+    tags:["cash"],
+    ex:"実際の現金残高と帳簿残高の差額を処理する勘定です。"
+  },
+
+  {
+    ja:"火災未決算",
+    en:"Fire Loss Pending Settlement",
+    cat:"その他",
+    tags:["fire","loss"],
+    ex:"火災による損失について、保険金などがまだ確定していない場合に一時的に処理する勘定です。"
+  },
+
+
+  /* 資産・負債の一時勘定 */
+
+  {
+    ja:"仮受金",
+    en:"Suspense Receipts",
+    cat:"負債",
+    tags:["suspense"],
+    ex:"内容や相手勘定がまだ確定していない入金を一時的に処理する勘定です。"
+  },
+
+  {
+    ja:"仮払金",
+    en:"Temporary Payments",
+    cat:"資産",
+    tags:["temporary"],
+    ex:"支払内容や金額がまだ確定していない支出を一時的に処理する勘定です。"
+  },
+
+  {
+    ja:"仮払法人税等",
+    en:"Income Taxes Paid in Advance",
+    cat:"資産",
+    tags:["tax","prepaid"],
+    ex:"法人税等の中間納付など、確定前に支払った税金です。"
+  }
 
 ];
 
 
-/* ==================================================
-   学習記録
-================================================== */
+/* =========================================================
+   データチェック
+========================================================= */
 
-let stats=JSON.parse(
-localStorage.getItem("accountingStats")
-)||{
-correct:0,
-total:0
-};
+const validQuestions = questions.filter(function(q){
 
-let memory=JSON.parse(
-localStorage.getItem("accountingMemory")
-)||{};
+  return (
+    q &&
+    typeof q.ja === "string" &&
+    q.ja.length > 0 &&
+    typeof q.en === "string" &&
+    q.en.length > 0
+  );
 
-let current=-1;
-let answered=false;
+});
 
 
-/* ==================================================
-   配列シャッフル
-================================================== */
+/* =========================================================
+   LocalStorage
+========================================================= */
 
-function shuffle(arr){
+function loadJSON(key, fallback){
 
-let a=[...arr];
+  try{
 
-for(let i=a.length-1;i>0;i--){
+    const value = localStorage.getItem(key);
 
-let j=Math.floor(Math.random()*(i+1));
+    if(!value){
+      return fallback;
+    }
 
-[a[i],a[j]]=[a[j],a[i]];
+    const parsed = JSON.parse(value);
+
+    return parsed ?? fallback;
+
+  }catch(error){
+
+    console.warn("保存データの読み込みに失敗:", error);
+
+    return fallback;
+
+  }
 
 }
 
-return a;
+
+let stats = loadJSON(
+  "accountingStatsV2",
+  {
+    correct:0,
+    total:0,
+    streak:0,
+    bestStreak:0
+  }
+);
+
+
+let memory = loadJSON(
+  "accountingMemoryV2",
+  {}
+);
+
+
+let current = -1;
+let answered = false;
+let reviewMode = false;
+let lastQuestion = -1;
+
+
+/* =========================================================
+   保存
+========================================================= */
+
+function saveData(){
+
+  try{
+
+    localStorage.setItem(
+      "accountingStatsV2",
+      JSON.stringify(stats)
+    );
+
+    localStorage.setItem(
+      "accountingMemoryV2",
+      JSON.stringify(memory)
+    );
+
+  }catch(error){
+
+    console.warn("学習記録の保存に失敗:", error);
+
+  }
 
 }
 
 
-/* ==================================================
+/* =========================================================
+   シャッフル
+========================================================= */
+
+function shuffle(array){
+
+  const result = Array.isArray(array)
+    ? array.slice()
+    : [];
+
+  for(
+    let i=result.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=Math.floor(
+      Math.random()*(i+1)
+    );
+
+    const temp=result[i];
+
+    result[i]=result[j];
+
+    result[j]=temp;
+
+  }
+
+  return result;
+
+}
+
+
+/* =========================================================
    重み付き問題選択
-================================================== */
+========================================================= */
 
 function chooseQuestion(){
 
-let pool=[];
+  if(validQuestions.length===0){
+    return -1;
+  }
 
-questions.forEach((q,i)=>{
 
-let m=memory[i]||{
-wrong:0,
-correct:0
-};
+  /* 苦手復習モード */
 
-let weight=1;
+  if(reviewMode){
 
-weight+=m.wrong*4;
+    const weakIndexes = validQuestions
+      .map(function(q,index){
 
-if(m.correct===0){
-weight+=3;
+        const m=memory[index] || {
+          correct:0,
+          wrong:0
+        };
+
+        return {
+          index:index,
+          wrong:Number(m.wrong)||0,
+          correct:Number(m.correct)||0
+        };
+
+      })
+      .filter(function(x){
+
+        return x.wrong>0;
+
+      })
+      .sort(function(a,b){
+
+        const scoreA=a.wrong-a.correct;
+        const scoreB=b.wrong-b.correct;
+
+        return scoreB-scoreA;
+
+      });
+
+
+    if(weakIndexes.length>0){
+
+      let pool=[];
+
+      weakIndexes.forEach(function(item){
+
+        const weight=
+          2+
+          item.wrong*3+
+          Math.max(
+            0,
+            item.wrong-item.correct
+          );
+
+        for(
+          let i=0;
+          i<weight;
+          i++
+        ){
+
+          pool.push(item.index);
+
+        }
+
+      });
+
+
+      if(pool.length>0){
+
+        let selected=
+          pool[
+            Math.floor(
+              Math.random()*pool.length
+            )
+          ];
+
+
+        if(
+          pool.length>1 &&
+          selected===lastQuestion
+        ){
+
+          const alternatives=
+            pool.filter(function(x){
+
+              return x!==lastQuestion;
+
+            });
+
+          selected=
+            alternatives[
+              Math.floor(
+                Math.random()*alternatives.length
+              )
+            ];
+
+        }
+
+        return selected;
+
+      }
+
+    }
+
+    /* 弱点がまだない場合は通常モードへ */
+
+    reviewMode=false;
+
+  }
+
+
+  /* 通常モード */
+
+  let pool=[];
+
+
+  validQuestions.forEach(function(q,index){
+
+    const m=memory[index] || {
+      correct:0,
+      wrong:0
+    };
+
+    const wrong=Number(m.wrong)||0;
+    const correct=Number(m.correct)||0;
+
+    let weight=3;
+
+    /* 初見問題 */
+
+    if(correct===0 && wrong===0){
+      weight+=5;
+    }
+
+    /* 間違いを強く優先 */
+
+    weight+=wrong*4;
+
+    /* 苦手ならさらに優先 */
+
+    if(wrong>correct){
+      weight+=6;
+    }
+
+    /* 直前の問題は少し出にくくする */
+
+    if(index===lastQuestion){
+      weight=1;
+    }
+
+    for(
+      let i=0;
+      i<weight;
+      i++
+    ){
+
+      pool.push(index);
+
+    }
+
+  });
+
+
+  if(pool.length===0){
+
+    return Math.floor(
+      Math.random()*validQuestions.length
+    );
+
+  }
+
+
+  return pool[
+    Math.floor(
+      Math.random()*pool.length
+    )
+  ];
+
 }
 
-if(m.wrong>m.correct){
-weight+=5;
+
+/* =========================================================
+   4択生成
+========================================================= */
+
+function createChoices(questionIndex){
+
+  const question=
+    validQuestions[questionIndex];
+
+
+  if(!question){
+    return [];
+  }
+
+
+  /*
+   * 正解以外の候補
+   *
+   * まず同じカテゴリーを優先。
+   * それでも足りなければ全問題から補充。
+   */
+
+  const sameCategory =
+    validQuestions.filter(function(q,index){
+
+      return (
+        index!==questionIndex &&
+        q.cat===question.cat
+      );
+
+    });
+
+
+  const others =
+    validQuestions.filter(function(q,index){
+
+      return index!==questionIndex;
+
+    });
+
+
+  let candidates=
+    shuffle(sameCategory);
+
+
+  const used=
+    new Set([question.en]);
+
+
+  const result=[question.en];
+
+
+  /* 同じカテゴリーから追加 */
+
+  for(
+    let i=0;
+    i<candidates.length &&
+    result.length<4;
+    i++
+  ){
+
+    const answer=candidates[i].en;
+
+    if(
+      !used.has(answer)
+    ){
+
+      used.add(answer);
+
+      result.push(answer);
+
+    }
+
+  }
+
+
+  /* 足りなければ全体から追加 */
+
+  if(result.length<4){
+
+    candidates=
+      shuffle(others);
+
+    for(
+      let i=0;
+      i<candidates.length &&
+      result.length<4;
+      i++
+    ){
+
+      const answer=candidates[i].en;
+
+      if(
+        !used.has(answer)
+      ){
+
+        used.add(answer);
+
+        result.push(answer);
+
+      }
+
+    }
+
+  }
+
+
+  return shuffle(result);
+
 }
 
-for(let n=0;n<weight;n++){
-pool.push(i);
-}
 
-});
-
-return pool[
-Math.floor(Math.random()*pool.length)
-];
-
-}
-
-
-/* ==================================================
+/* =========================================================
    問題表示
-================================================== */
+========================================================= */
 
 function loadQuestion(){
 
-answered=false;
+  answered=false;
 
-current=chooseQuestion();
-
-let q=questions[current];
-
-document.getElementById("question")
-.textContent=q.ja;
-
-document.getElementById("result")
-.textContent="";
-
-document.getElementById("explanation")
-.innerHTML="";
-
-document.getElementById("next")
-.style.display="none";
-
-let choices=document.getElementById("choices");
-
-choices.innerHTML="";
+  current=chooseQuestion();
 
 
-let wrongAnswers = shuffle(
-  questions
-    .filter((item, index) => index !== current)
-    .map(item => item.en)
-);
+  if(current<0){
 
-let answers = shuffle([
-  q.en,
-  wrongAnswers[0],
-  wrongAnswers[1],
-  wrongAnswers[2]
-]);
+    document.getElementById(
+      "question"
+    ).textContent=
+      "問題データがありません。";
 
-answers.forEach(answer => {
+    return;
 
-  let button = document.createElement("button");
-
-  button.className = "choice";
-  button.textContent = answer;
-
-  button.onclick = () => {
-    checkAnswer(answer, button);
-  };
-
-  choices.appendChild(button);
-
-});
-
-choices.appendChild(button);
-
-});
-
-updateStats();
-
-}
+  }
 
 
-/* ==================================================
-   回答
-================================================== */
-
-function checkAnswer(answer,button){
-
-if(answered)return;
-
-answered=true;
-
-let q=questions[current];
-
-let correct=answer===q.en;
-
-stats.total++;
-
-if(correct){
-stats.correct++;
-}
-
-if(!memory[current]){
-
-memory[current]={
-correct:0,
-wrong:0
-};
-
-}
-
-if(correct){
-memory[current].correct++;
-}else{
-memory[current].wrong++;
-}
+  lastQuestion=current;
 
 
-localStorage.setItem(
-"accountingStats",
-JSON.stringify(stats)
-);
-
-localStorage.setItem(
-"accountingMemory",
-JSON.stringify(memory)
-);
+  const q=
+    validQuestions[current];
 
 
-/* 正解を表示 */
-
-document.querySelectorAll(".choice")
-.forEach(b=>{
-
-b.classList.add("disabled");
-
-if(b.textContent===q.en){
-
-b.classList.add("correct");
-
-}
-
-});
+  document.getElementById(
+    "question"
+  ).textContent=q.ja;
 
 
-if(correct){
+  document.getElementById(
+    "questionType"
+  ).textContent=
+    reviewMode
+      ? "🔥 苦手問題 → 会計英語"
+      : "日本語 → 会計英語";
 
-button.classList.add("correct");
 
-document.getElementById("result")
-.textContent="🎉 正解！";
+  document.getElementById(
+    "result"
+  ).textContent="";
 
-}else{
 
-button.classList.add("wrong");
+  document.getElementById(
+    "explanation"
+  ).innerHTML="";
 
-document.getElementById("result")
-.textContent="❌ 不正解";
+
+  document.getElementById(
+    "next"
+  ).style.display="none";
+
+
+  const choices=
+    document.getElementById(
+      "choices"
+    );
+
+
+  choices.innerHTML="";
+
+
+  const answers=
+    createChoices(current);
+
+
+  answers.forEach(function(answer){
+
+    const button=
+      document.createElement("button");
+
+
+    button.type="button";
+
+    button.className="choice";
+
+    button.textContent=answer;
+
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        checkAnswer(
+          answer,
+          button
+        );
+
+      }
+    );
+
+
+    choices.appendChild(button);
+
+  });
+
+
+  updateStats();
 
 }
 
 
-document.getElementById("explanation")
-.innerHTML=
+/* =========================================================
+   回答処理
+========================================================= */
 
-`<div class="answerbox">
+function checkAnswer(
+  answer,
+  clickedButton
+){
 
-<div class="answerlabel">
-正解
-</div>
-
-<div class="answer">
-${q.en}
-</div>
-
-</div>
-
-<div style="margin-top:12px">
-💡 ${q.ex}
-</div>`;
+  if(answered){
+    return;
+  }
 
 
-document.getElementById("next")
-.style.display="block";
+  answered=true;
 
-updateStats();
+
+  const q=
+    validQuestions[current];
+
+
+  if(!q){
+    return;
+  }
+
+
+  const isCorrect=
+    answer===q.en;
+
+
+  /* メモリ初期化 */
+
+  if(!memory[current]){
+
+    memory[current]={
+      correct:0,
+      wrong:0
+    };
+
+  }
+
+
+  /* 統計 */
+
+  stats.total++;
+
+
+  if(isCorrect){
+
+    stats.correct++;
+
+    stats.streak++;
+
+    if(
+      stats.streak>
+      stats.bestStreak
+    ){
+
+      stats.bestStreak=
+        stats.streak;
+
+    }
+
+    memory[current].correct++;
+
+  }else{
+
+    stats.streak=0;
+
+    memory[current].wrong++;
+
+  }
+
+
+  saveData();
+
+
+  /* ボタンをロック */
+
+  const allButtons=
+    document.querySelectorAll(
+      ".choice"
+    );
+
+
+  allButtons.forEach(function(button){
+
+    button.disabled=true;
+
+    button.classList.add(
+      "disabled"
+    );
+
+
+    if(
+      button.textContent===q.en
+    ){
+
+      button.classList.add(
+        "correct"
+      );
+
+    }
+
+  });
+
+
+  /* 押した選択肢 */
+
+  if(!isCorrect){
+
+    clickedButton.classList.add(
+      "wrong"
+    );
+
+  }
+
+
+  /* 結果 */
+
+  document.getElementById(
+    "result"
+  ).textContent=
+    isCorrect
+      ? "🎉 正解！"
+      : "❌ 不正解";
+
+
+  /* 解説 */
+
+  document.getElementById(
+    "explanation"
+  ).innerHTML=
+
+    '<div class="answerbox">' +
+
+      '<div class="answerlabel">' +
+        '正解' +
+      '</div>' +
+
+      '<div class="answer">' +
+        escapeHTML(q.en) +
+      '</div>' +
+
+    '</div>' +
+
+    '<div style="margin-top:12px">' +
+      '💡 ' +
+      escapeHTML(q.ex || "") +
+    '</div>';
+
+
+  document.getElementById(
+    "next"
+  ).style.display="block";
+
+
+  updateStats();
 
 }
 
 
-/* ==================================================
-   統計
-================================================== */
+/* =========================================================
+   HTMLエスケープ
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   統計表示
+========================================================= */
 
 function updateStats(){
 
-document.getElementById("score")
-.textContent=stats.correct;
+  const correct=
+    Number(stats.correct)||0;
 
-document.getElementById("total")
-.textContent=stats.total;
+  const total=
+    Number(stats.total)||0;
 
-let rate=stats.total===0
-?0
-:Math.round(
-stats.correct/stats.total*100
-);
+  const rate=
+    total===0
+      ? 0
+      : Math.round(
+          correct/total*100
+        );
 
-document.getElementById("rate")
-.textContent=rate+"%";
+
+  document.getElementById(
+    "score"
+  ).textContent=correct;
+
+
+  document.getElementById(
+    "total"
+  ).textContent=total;
+
+
+  document.getElementById(
+    "rate"
+  ).textContent=
+    rate+"%";
+
+
+  document.getElementById(
+    "streak"
+  ).textContent=
+    "連続正解 "+
+    (Number(stats.streak)||0)+
+    "問";
 
 }
 
 
-/* ==================================================
+/* =========================================================
    次の問題
-================================================== */
+========================================================= */
 
 function nextQuestion(){
 
-loadQuestion();
+  loadQuestion();
 
 }
 
 
-/* ==================================================
-   画面切替
-================================================== */
+/* =========================================================
+   学習画面
+========================================================= */
 
 function showStudy(){
 
-document.getElementById("study")
-.classList.remove("hidden");
+  document.getElementById(
+    "study"
+  ).classList.remove("hidden");
 
-document.getElementById("analysis")
-.classList.add("hidden");
 
-document.getElementById("studyTab")
-.classList.add("active");
+  document.getElementById(
+    "analysis"
+  ).classList.add("hidden");
 
-document.getElementById("analysisTab")
-.classList.remove("active");
+
+  document.getElementById(
+    "studyTab"
+  ).classList.add("active");
+
+
+  document.getElementById(
+    "analysisTab"
+  ).classList.remove("active");
 
 }
 
+
+/* =========================================================
+   自己分析画面
+========================================================= */
 
 function showAnalysis(){
 
-document.getElementById("study")
-.classList.add("hidden");
+  document.getElementById(
+    "study"
+  ).classList.add("hidden");
 
-document.getElementById("analysis")
-.classList.remove("hidden");
 
-document.getElementById("studyTab")
-.classList.remove("active");
+  document.getElementById(
+    "analysis"
+  ).classList.remove("hidden");
 
-document.getElementById("analysisTab")
-.classList.add("active");
 
-buildAnalysis();
+  document.getElementById(
+    "studyTab"
+  ).classList.remove("active");
+
+
+  document.getElementById(
+    "analysisTab"
+  ).classList.add("active");
+
+
+  buildAnalysis();
 
 }
 
 
-/* ==================================================
+/* =========================================================
    自己分析
-================================================== */
+========================================================= */
 
 function buildAnalysis(){
 
-let rate=stats.total===0
-?0
-:Math.round(
-stats.correct/stats.total*100
-);
+  const total=
+    Number(stats.total)||0;
 
-document.getElementById("analysisRate")
-.textContent=rate+"%";
+  const correct=
+    Number(stats.correct)||0;
 
 
-/* 分野別 */
+  const rate=
+    total===0
+      ? 0
+      : Math.round(
+          correct/total*100
+        );
 
-let categories={};
 
-questions.forEach((q,i)=>{
+  document.getElementById(
+    "analysisRate"
+  ).textContent=
+    rate+"%";
 
-if(!categories[q.cat]){
 
-categories[q.cat]={
-correct:0,
-total:0
-};
+  document.getElementById(
+    "analysisSummary"
+  ).innerHTML=
+    total===0
+
+      ? "まだ学習データがありません。まず問題を解いてみよう。"
+
+      :
+
+        "回答 "+
+        total+
+        "問　｜　正解 "+
+        correct+
+        "問　｜　最高連続 "+
+        (Number(stats.bestStreak)||0)+
+        "問";
+
+
+  /* ---------- 分野別 ---------- */
+
+  const categories={};
+
+
+  validQuestions.forEach(function(q,index){
+
+    if(!categories[q.cat]){
+
+      categories[q.cat]={
+        correct:0,
+        wrong:0
+      };
+
+    }
+
+
+    const m=
+      memory[index] || {
+        correct:0,
+        wrong:0
+      };
+
+
+    categories[q.cat].correct +=
+      Number(m.correct)||0;
+
+
+    categories[q.cat].wrong +=
+      Number(m.wrong)||0;
+
+  });
+
+
+  let categoryHTML="";
+
+
+  Object.keys(categories).forEach(
+    function(category){
+
+      const data=
+        categories[category];
+
+
+      const attempts=
+        data.correct+
+        data.wrong;
+
+
+      const r=
+        attempts===0
+          ? 0
+          : Math.round(
+              data.correct/
+              attempts*100
+            );
+
+
+      categoryHTML +=
+
+        '<div class="barrow">' +
+
+          '<div class="bartitle">' +
+
+            '<span>'+
+              escapeHTML(category)+
+            '</span>' +
+
+            '<span>'+
+              r+
+              '%'+
+            '</span>' +
+
+          '</div>' +
+
+          '<div class="bar">' +
+
+            '<div class="fill" '+
+              'style="width:'+r+'%">'+
+            '</div>' +
+
+          '</div>' +
+
+        '</div>';
+
+    }
+  );
+
+
+  document.getElementById(
+    "categoryAnalysis"
+  ).innerHTML=
+    categoryHTML;
+
+
+  /* ---------- 苦手問題 ---------- */
+
+  const weak=
+    validQuestions
+      .map(function(q,index){
+
+        const m=
+          memory[index] || {
+            correct:0,
+            wrong:0
+          };
+
+
+        const c=
+          Number(m.correct)||0;
+
+        const w=
+          Number(m.wrong)||0;
+
+        const attempts=
+          c+w;
+
+
+        const r=
+          attempts===0
+            ? 0
+            : Math.round(
+                c/attempts*100
+              );
+
+
+        return {
+          q:q,
+          index:index,
+          correct:c,
+          wrong:w,
+          attempts:attempts,
+          rate:r
+        };
+
+      })
+      .filter(function(item){
+
+        return item.wrong>0;
+
+      })
+      .sort(function(a,b){
+
+        /*
+         * 間違い回数
+         * ↓
+         * 正答率
+         * ↓
+         * 回答回数
+         */
+
+        if(
+          b.wrong!==a.wrong
+        ){
+
+          return b.wrong-a.wrong;
+
+        }
+
+
+        if(
+          a.rate!==b.rate
+        ){
+
+          return a.rate-b.rate;
+
+        }
+
+
+        return b.attempts-
+          a.attempts;
+
+      })
+      .slice(0,5);
+
+
+  let weakHTML="";
+
+
+  if(weak.length===0){
+
+    weakHTML=
+      '<div class="message">' +
+        'まだ間違えた問題がありません。<br>' +
+        '問題を解くと、ここに苦手問題が表示されます。' +
+      '</div>';
+
+  }else{
+
+    weak.forEach(function(item){
+
+      weakHTML +=
+
+        '<div class="weak">' +
+
+          '<div class="weak-main">' +
+
+            '<div>'+
+              escapeHTML(
+                item.q.ja
+              )+
+            '</div>' +
+
+            '<div class="weak-en">'+
+              escapeHTML(
+                item.q.en
+              )+
+            '</div>' +
+
+          '</div>' +
+
+          '<div class="red">'+
+            item.rate+
+            '%'+
+          '</div>' +
+
+        '</div>';
+
+    });
+
+  }
+
+
+  document.getElementById(
+    "weakQuestions"
+  ).innerHTML=
+    weakHTML;
+
+
+  /* ---------- 英語パーツ ---------- */
+
+  const tags={};
+
+
+  validQuestions.forEach(function(q,index){
+
+    const m=
+      memory[index] || {
+        correct:0,
+        wrong:0
+      };
+
+
+    const c=
+      Number(m.correct)||0;
+
+    const w=
+      Number(m.wrong)||0;
+
+    const attempts=c+w;
+
+
+    if(attempts===0){
+      return;
+    }
+
+
+    const qTags=
+      Array.isArray(q.tags)
+        ? q.tags
+        : [];
+
+
+    qTags.forEach(function(tag){
+
+      if(!tags[tag]){
+
+        tags[tag]={
+          correct:0,
+          wrong:0
+        };
+
+      }
+
+
+      tags[tag].correct+=c;
+
+      tags[tag].wrong+=w;
+
+    });
+
+  });
+
+
+  const tagList=
+    Object.keys(tags)
+      .map(function(tag){
+
+        const c=
+          tags[tag].correct;
+
+        const w=
+          tags[tag].wrong;
+
+        const attempts=c+w;
+
+
+        return {
+          tag:tag,
+          correct:c,
+          wrong:w,
+          attempts:attempts,
+          rate:
+            attempts===0
+              ? 0
+              : Math.round(
+                  c/attempts*100
+                )
+        };
+
+      })
+      .filter(function(item){
+
+        return item.attempts>=2;
+
+      })
+      .sort(function(a,b){
+
+        return a.rate-b.rate;
+
+      })
+      .slice(0,5);
+
+
+  let tagHTML="";
+
+
+  if(tagList.length===0){
+
+    tagHTML=
+      '<div class="message">' +
+        '同じ英語パーツを含む問題を<br>' +
+        '2回以上解くと分析できます。' +
+      '</div>';
+
+  }else{
+
+    tagList.forEach(function(item){
+
+      tagHTML +=
+
+        '<div class="weak">' +
+
+          '<div class="weak-main">' +
+
+            '<div>'+
+              escapeHTML(
+                formatTag(item.tag)
+              )+
+            '</div>' +
+
+            '<div class="weak-en">'+
+              '正解 '+
+              item.correct+
+              ' / '+
+              item.attempts+
+              '回'+
+            '</div>' +
+
+          '</div>' +
+
+          '<div class="'+
+            (
+              item.rate<60
+                ? "red"
+                : "green"
+            )+
+          '">' +
+            item.rate+
+            '%' +
+          '</div>' +
+
+        '</div>';
+
+    });
+
+  }
+
+
+  document.getElementById(
+    "wordAnalysis"
+  ).innerHTML=
+    tagHTML;
+
+
+  /* ---------- アドバイス ---------- */
+
+  let advice="";
+
+
+  if(total===0){
+
+    advice=
+      "まずは10問ほど解いてみよう。データがたまるほど、あなた専用の弱点分析が正確になります。";
+
+  }else if(rate<60){
+
+    advice=
+      "現在は正答率60%未満。新しい単語を増やすより、間違えた問題を繰り返して定着させる段階です。";
+
+  }else if(rate<80){
+
+    advice=
+      "基礎はかなり身についてきています。苦手問題TOP5を中心に復習して、正答率80%超を目指そう。";
+
+  }else{
+
+    advice=
+      "かなり良い状態です。ここからは似た表現の区別や、長い会計英語を構成要素に分解して覚える段階です。";
+
+  }
+
+
+  document.getElementById(
+    "advice"
+  ).innerHTML=
+    '<div class="message">'+
+      advice+
+    '</div>';
 
 }
 
-let m=memory[i]||{
-correct:0,
-wrong:0
-};
 
-categories[q.cat].correct+=m.correct;
-
-categories[q.cat].total+=
-m.correct+m.wrong;
-
-});
-
-
-let categoryHTML="";
-
-Object.keys(categories).forEach(cat=>{
-
-let d=categories[cat];
-
-let r=d.total===0
-?0
-:Math.round(
-d.correct/d.total*100
-);
-
-categoryHTML+=`
-
-<div class="barrow">
-
-<div class="bartitle">
-
-<span>${cat}</span>
-
-<span>${r}%</span>
-
-</div>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${r}%">
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("categoryAnalysis")
-.innerHTML=
-categoryHTML;
-
-
-/* 苦手問題 */
-
-let weak=questions
-.map((q,i)=>{
-
-let m=memory[i]||{
-correct:0,
-wrong:0
-};
-
-return{
-q,
-i,
-wrong:m.wrong,
-correct:m.correct,
-total:m.correct+m.wrong
-};
-
-})
-.filter(x=>x.wrong>0)
-.sort((a,b)=>{
-
-if(b.wrong!==a.wrong){
-return b.wrong-a.wrong;
-}
-
-return a.correct-b.correct;
-
-})
-.slice(0,5);
-
-
-let weakHTML="";
-
-if(weak.length===0){
-
-weakHTML=
-`<div class="center">
-まだ間違えた問題がありません。<br>
-まずは問題を解いてみよう！
-</div>`;
-
-}else{
-
-weak.forEach(x=>{
-
-let r=x.total===0
-?0
-:Math.round(
-x.correct/x.total*100
-);
-
-weakHTML+=`
-
-<div class="weak">
-
-<span>
-${x.q.ja}
-<br>
-<span class="small">
-${x.q.en}
-</span>
-</span>
-
-<span class="red">
-${r}%
-</span>
-
-</div>
-
-`;
-
-});
-
-}
-
-document.getElementById("weakQuestions")
-.innerHTML=weakHTML;
-
-
-/* 英語パーツ */
-
-let tags={};
-
-questions.forEach((q,i)=>{
-
-let m=memory[i]||{
-correct:0,
-wrong:0
-};
-
-let total=m.correct+m.wrong;
-
-if(total===0)return;
-
-q.tags.forEach(tag=>{
-
-if(!tags[tag]){
-
-tags[tag]={
-correct:0,
-total:0
-};
-
-}
-
-tags[tag].correct+=m.correct;
-
-tags[tag].total+=total;
-
-});
-
-});
-
-
-let tagList=Object.keys(tags)
-.map(tag=>{
-
-let d=tags[tag];
-
-return{
-tag,
-rate:Math.round(
-d.correct/d.total*100
-),
-total:d.total
-};
-
-})
-.filter(x=>x.total>=2)
-.sort((a,b)=>a.rate-b.rate)
-.slice(0,5);
-
-
-let tagHTML="";
-
-if(tagList.length===0){
-
-tagHTML=
-`<div class="center">
-同じ英語パーツを含む問題を<br>
-2回以上解くと分析できます。
-</div>`;
-
-}else{
-
-tagList.forEach(x=>{
-
-tagHTML+=`
-
-<div class="weak">
-
-<span>
-${formatTag(x.tag)}
-</span>
-
-<span class="${x.rate<60?'red':'green'}">
-${x.rate}%
-</span>
-
-</div>
-
-`;
-
-});
-
-}
-
-document.getElementById("wordAnalysis")
-.innerHTML=tagHTML;
-
-
-/* アドバイス */
-
-let advice="";
-
-if(stats.total===0){
-
-advice=
-"まずは10問ほど解いてみよう。データがたまると、あなたの弱点を分析できるようになります。";
-
-}else if(rate<60){
-
-advice=
-"現在は正答率が60%未満。まずは量を増やすより、間違えた問題を繰り返して定着させるのがおすすめ。";
-
-}else if(rate<80){
-
-advice=
-"基礎はかなり身についてきています。苦手問題を重点的に復習して80%超を目指そう。";
-
-}else{
-
-advice=
-"かなり良い状態。ここからは似た単語の区別や細かい会計用語を重点的に潰していこう。";
-
-}
-
-document.getElementById("advice")
-.innerHTML=advice;
-
-}
-
-
-/* ==================================================
+/* =========================================================
    英語パーツ表示
-================================================== */
+========================================================= */
 
 function formatTag(tag){
 
-const names={
+  const names={
 
-"receivable":"receivable",
-"payable":"payable",
-"accrued":"accrued",
-"prepaid":"prepaid",
-"unearned":"unearned",
-"gain":"gain",
-"loss":"loss",
-"expense":"expense",
-"revenue":"revenue",
-"income":"income",
-"interest":"interest",
-"capital":"capital",
-"surplus":"surplus",
-"reserve":"reserve",
-"treasury":"treasury",
-"stock":"stock",
-"securities":"securities",
-"valuation":"valuation",
-"allowance":"allowance",
-"provision":"provision",
-"bonds":"bonds",
-"notes":"notes",
-"cash":"cash",
-"inventory":"inventory",
-"fixed-assets":"fixed assets",
-"intangible":"intangible assets",
-"goodwill":"goodwill",
-"dividend":"dividend",
-"amortization":"amortization",
-"software":"software",
-"commission":"commission",
-"organization":"organization",
-"commencement":"commencement",
-"development":"development",
-"issuance":"issuance",
-"foreign-exchange":"foreign exchange",
-"reversal":"reversal",
-"insurance":"insurance",
-"subsidy":"subsidy",
-"miscellaneous":"miscellaneous",
-"land":"land",
-"hedge":"hedge",
-"rights":"rights",
-"suspense":"suspense",
-"temporary":"temporary",
-"tax":"tax",
-"fire":"fire"
+    "receivable":
+      "receivable",
 
-};
+    "payable":
+      "payable",
 
-return names[tag]||tag;
+    "accrued":
+      "accrued",
+
+    "prepaid":
+      "prepaid",
+
+    "unearned":
+      "unearned",
+
+    "gain":
+      "gain",
+
+    "loss":
+      "loss",
+
+    "expense":
+      "expense",
+
+    "revenue":
+      "revenue",
+
+    "income":
+      "income",
+
+    "interest":
+      "interest",
+
+    "capital":
+      "capital",
+
+    "surplus":
+      "surplus",
+
+    "reserve":
+      "reserve",
+
+    "treasury":
+      "treasury",
+
+    "stock":
+      "stock",
+
+    "securities":
+      "securities",
+
+    "valuation":
+      "valuation",
+
+    "allowance":
+      "allowance",
+
+    "provision":
+      "provision",
+
+    "bonds":
+      "bonds",
+
+    "notes":
+      "notes",
+
+    "cash":
+      "cash",
+
+    "inventory":
+      "inventory",
+
+    "fixed-assets":
+      "fixed assets",
+
+    "intangible":
+      "intangible assets",
+
+    "goodwill":
+      "goodwill",
+
+    "dividend":
+      "dividend",
+
+    "amortization":
+      "amortization",
+
+    "software":
+      "software",
+
+    "commission":
+      "commission",
+
+    "organization":
+      "organization",
+
+    "commencement":
+      "commencement",
+
+    "development":
+      "development",
+
+    "issuance":
+      "issuance",
+
+    "foreign-exchange":
+      "foreign exchange",
+
+    "reversal":
+      "reversal",
+
+    "insurance":
+      "insurance",
+
+    "subsidy":
+      "subsidy",
+
+    "miscellaneous":
+      "miscellaneous",
+
+    "land":
+      "land",
+
+    "hedge":
+      "hedge",
+
+    "rights":
+      "rights",
+
+    "suspense":
+      "suspense",
+
+    "temporary":
+      "temporary",
+
+    "tax":
+      "tax",
+
+    "fire":
+      "fire",
+
+    "retained":
+      "retained",
+
+    "earnings":
+      "earnings",
+
+    "dividend":
+      "dividend",
+
+    "sales":
+      "sales"
+
+  };
+
+
+  return names[tag] || tag;
 
 }
 
 
-/* ==================================================
-   リセット
-================================================== */
+/* =========================================================
+   苦手問題モード
+========================================================= */
+
+function startWeakReview(){
+
+  const hasWeak=
+    validQuestions.some(
+      function(q,index){
+
+        const m=
+          memory[index] || {
+            wrong:0
+          };
+
+        return (
+          Number(m.wrong)||0
+        )>0;
+
+      }
+    );
+
+
+  if(!hasWeak){
+
+    alert(
+      "まだ間違えた問題がありません。\nまずは通常モードで問題を解いてみよう！"
+    );
+
+    showStudy();
+
+    return;
+
+  }
+
+
+  reviewMode=true;
+
+  showStudy();
+
+  loadQuestion();
+
+}
+
+
+/* =========================================================
+   データリセット
+========================================================= */
 
 function resetData(){
 
-let ok=confirm(
-"学習記録をすべて削除しますか？"
-);
+  const ok=
+    confirm(
+      "学習記録をすべて削除しますか？"
+    );
 
-if(!ok)return;
 
-stats={
-correct:0,
-total:0
-};
+  if(!ok){
+    return;
+  }
 
-memory={};
 
-localStorage.removeItem(
-"accountingStats"
-);
+  stats={
+    correct:0,
+    total:0,
+    streak:0,
+    bestStreak:0
+  };
 
-localStorage.removeItem(
-"accountingMemory"
-);
 
-updateStats();
+  memory={};
 
-buildAnalysis();
 
-loadQuestion();
+  reviewMode=false;
+
+
+  try{
+
+    localStorage.removeItem(
+      "accountingStatsV2"
+    );
+
+    localStorage.removeItem(
+      "accountingMemoryV2"
+    );
+
+  }catch(error){
+
+    console.warn(
+      "データ削除に失敗:",
+      error
+    );
+
+  }
+
+
+  updateStats();
+
+  buildAnalysis();
+
+  showStudy();
+
+  loadQuestion();
 
 }
 
 
-/* ==================================================
-   起動
-================================================== */
+/* =========================================================
+   初期化
+========================================================= */
 
-loadQuestion();
+(function init(){
+
+  /*
+   * 古いバージョンのデータは
+   * そのまま残しておく。
+   *
+   * 新バージョンは V2 として保存するので、
+   * 前のアプリのデータとの衝突を防ぐ。
+   */
+
+  if(validQuestions.length===0){
+
+    document.getElementById(
+      "question"
+    ).textContent=
+      "問題を読み込めませんでした。";
+
+    return;
+
+  }
+
+
+  updateStats();
+
+  loadQuestion();
+
+})();
 
 </script>
 
