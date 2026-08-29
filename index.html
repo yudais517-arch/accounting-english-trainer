@@ -992,19 +992,34 @@ let choices=document.getElementById("choices");
 
 choices.innerHTML="";
 
-let answers=shuffle(q.choices||[]);
 
-answers.forEach(answer=>{
+let wrongAnswers = shuffle(
+  questions
+    .filter((item, index) => index !== current)
+    .map(item => item.en)
+);
 
-let button=document.createElement("button");
+let answers = shuffle([
+  q.en,
+  wrongAnswers[0],
+  wrongAnswers[1],
+  wrongAnswers[2]
+]);
 
-button.className="choice";
+answers.forEach(answer => {
 
-button.textContent=answer;
+  let button = document.createElement("button");
 
-button.onclick=()=>{
-checkAnswer(answer,button);
-};
+  button.className = "choice";
+  button.textContent = answer;
+
+  button.onclick = () => {
+    checkAnswer(answer, button);
+  };
+
+  choices.appendChild(button);
+
+});
 
 choices.appendChild(button);
 
